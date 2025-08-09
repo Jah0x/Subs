@@ -63,6 +63,9 @@ async def api_link(req: LinkReq):
     exp = now_ts() + exp_secs if exp_secs and exp_secs > 0 else 0
     payload = f"{req.uid}:{exp}"
     sig = sign(payload)
-    ext = "" if (not req.fmt or req.fmt == "txt") else (".yaml" if req.fmt == "yaml" else ".json")
+    if req.fmt not in (None, "txt", "yaml", "json"):
+        raise HTTPException(400, "Unsupported format")
+    ext_map = {"yaml": ".yaml", "json": ".json"}
+    ext = ext_map.get(req.fmt, "")
     url = f"/sub/{req.uid}{ext}?sig={sig}&exp={exp}"
     return {"url": url}

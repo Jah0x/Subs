@@ -1,5 +1,5 @@
 import argparse, asyncio, uuid
-from .database import get_engine, SessionLocal
+from .database import SessionLocal
 from .models import UID, UIDStatus
 
 async def seed(count: int):
