@@ -1,0 +1,26 @@
+# Clash subscription for ZerologsVPN
+proxies:
+{% for entry in entries %}
+  - name: Zerologs-{{loop.index}}
+    type: vless
+    server: {{host}}
+    port: {{port}}
+    uuid: {{entry.uid}}
+    flow: xtls-rprx-vision
+    network: tcp
+    tls: true
+    udp: true
+    reality-opts:
+      public-key: {{entry.pbk}}
+      short-id: {{entry.sid}}
+      server-name: {{entry.sni or sni}}
+    client-fingerprint: {{fp or 'chrome'}}
+{% endfor %}
+
+proxy-groups:
+  - name: Zerologs
+    type: select
+    proxies: [{% for i in range(1, entries|length + 1) %}"Zerologs-{{i}}"{% if not loop.last %}, {% endif %}{% endfor %}]
+rules:
+  - GEOIP,CN,DIRECT
+  - MATCH,Zerologs

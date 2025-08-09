@@ -1,0 +1,10 @@
+# ZerologsVPN vless subscriptions
+{% set host = host or 'zerologsvpn.com' %}
+{% set port = port or 443 %}
+{% set sni = sni or 'www.twitch.tv' %}
+{% set fp = fp or 'chrome' %}
+{% set flow = 'xtls-rprx-vision' %}
+{% set encryption = 'none' %}
+{% for entry in entries %}
+vless://{{entry.uid}}@{{host}}:{{port}}?type=tcp&security=reality&encryption={{encryption}}&flow={{flow}}&sni={{entry.sni or sni}}&fp={{fp}}&pbk={{entry.pbk}}&sid={{entry.sid}}#ZerologsVPN-{{loop.index}}
+{% endfor %}
