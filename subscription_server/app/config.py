@@ -9,6 +9,7 @@ DEFAULT_PBK = os.getenv("DEFAULT_PBK", "CHANGE_ME_PBK")
 DEFAULT_SID = os.getenv("DEFAULT_SID", "09c88c34c2a5fdb7")
 DEFAULT_FP = os.getenv("DEFAULT_FP", "chrome")
 LINK_TTL = int(os.getenv("LINK_TTL", "0"))
+HMAC_SECRET = os.getenv("HMAC_SECRET", "change_me_super_secret_key")
 
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 REDIS_CHANNEL = os.getenv("REDIS_CHANNEL", "uid_events")

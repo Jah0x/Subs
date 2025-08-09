@@ -1,11 +1,8 @@
-import os, hmac, hashlib, time
-from dotenv import load_dotenv
-load_dotenv()
-
-SECRET = os.getenv("HMAC_SECRET", "change_me_super_secret_key")
+import hmac, hashlib, time
+from ..config import HMAC_SECRET
 
 def sign(payload: str) -> str:
-    return hmac.new(SECRET.encode(), payload.encode(), hashlib.sha256).hexdigest()
+    return hmac.new(HMAC_SECRET.encode(), payload.encode(), hashlib.sha256).hexdigest()
 
 def verify(payload: str, sig: str) -> bool:
     expected = sign(payload)

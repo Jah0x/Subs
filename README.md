@@ -43,6 +43,25 @@ curl -sX POST http://localhost:8080/api/admin/link -H 'Content-Type: application
 ```
 3) Open returned `/sub/<uid>[.yaml|.json]`.
 
+## Route Examples
+
+- **Health check**
+  ```bash
+  curl http://localhost:8080/health
+  ```
+- **Revoke a UID**
+  ```bash
+  curl -sX POST http://localhost:8080/api/admin/revoke \
+       -H 'Content-Type: application/json' \
+       -d '{"uid":"<UUID>"}'
+  ```
+- **Retrieve subscription config**
+  ```bash
+  curl "http://localhost:8080/sub/<UID>?sig=<SIG>&exp=<EXP>"
+  curl "http://localhost:8080/sub/<UID>.yaml?sig=<SIG>&exp=<EXP>"
+  curl "http://localhost:8080/sub/<UID>.json?sig=<SIG>&exp=<EXP>"
+  ```
+
 ## Tests
 ```bash
 pip install -r requirements.txt
